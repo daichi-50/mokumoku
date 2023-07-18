@@ -34,19 +34,19 @@ class User < ApplicationRecord
         -> { joins(:notification_timings).merge(NotificationTiming.liked_event) }
 
   #　フォローしたときの処理
-def follow(user_id)
+  def follow(user_id)
     followers.create(followed_id: user_id)
-end
+  end
 
-#　フォローを外すときの処理
-def unfollow(user_id)
+  #　フォローを外すときの処理
+  def unfollow(user_id)
     followers.find_by(followed_id: user_id).destroy
-end
+  end
 
-#フォローしていればtrueを返す
-def following?(user)
+  #  フォローしていればtrueを返す
+  def following?(user)
     following_users.include?(user)
-end
+  end
 
   def owner?(event)
     event.user_id == id
